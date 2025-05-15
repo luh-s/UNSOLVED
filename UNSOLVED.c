@@ -2,6 +2,22 @@
 #include <stdlib.h>
 #include <windows.h>
 
+void title()
+{
+    printf("\n\n\
+\t\t\t██╗   ██╗███╗   ██╗███████╗ ██████╗ ██╗    ██╗   ██╗███████╗██████╗ \n\
+\t\t\t██║   ██║████╗  ██║██╔════╝██╔═══██╗██║    ██║   ██║██╔════╝██╔══██╗\n\
+\t\t\t██║   ██║██╔██╗ ██║███████╗██║   ██║██║    ██║   ██║█████╗  ██║  ██║\n\
+\t\t\t██║   ██║██║╚██╗██║╚════██║██║   ██║██║    ╚██╗ ██╔╝██╔══╝  ██║  ██║\n\
+\t\t\t╚██████╔╝██║ ╚████║███████║╚██████╔╝███████╗╚████╔╝ ███████╗██████╔╝\n\
+\t\t\t ╚═════╝ ╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝╚═════╝ \n\n");
+}
+void pause()
+{
+    printf("\n\t\t\t\t\t[APERTE QUALQUER TECLA PARA CONTINUAR]\n");
+    system("pause > NUL");
+}
+
 int main()
 {
     char nome[20];
@@ -19,33 +35,14 @@ int main()
         }
         
     }
-
-    printf("\n\n\t\t\t.---------------------------------------------------------------------------.\n\t\t\
-        |##     ## ##    ##  ######   #######  ##       ##     ## ######## ######## |\n\t\t\
-        |##     ## ###   ## ##    ## ##     ## ##       ##     ## ##       ##     ##|\n\t\t\
-        |##     ## ####  ## ##       ##     ## ##       ##     ## ##       ##     ##|\n\t\t\
-        |##     ## ## ## ##  ######  ##     ## ##       ##     ## ######   ##     ##|\n\t\t\
-        |##     ## ##  ####       ## ##     ## ##        ##   ##  ##       ##     ##|\n\t\t\
-        |##     ## ##   ### ##    ## ##     ## ##         ## ##   ##       ##     ##|\n\t\t\
-        | #######  ##    ##  ######   #######  ########    ###    ######## ######## |\n\t\t\
-        '---------------------------------------------------------------------------'\n\n");
-
-    printf("\t\t\t\t\t  [APERTE QUALQUER TECLA PARA CONTINUAR]\n");
-    system("pause > NUL");
+    title();
+    pause();
 
     while (escolha==0)
     {
         system("cls");
-        printf("\n\n\t\t\t.---------------------------------------------------------------------------.\n\t\t\
-        |##     ## ##    ##  ######   #######  ##       ##     ## ######## ######## |\n\t\t\
-        |##     ## ###   ## ##    ## ##     ## ##       ##     ## ##       ##     ##|\n\t\t\
-        |##     ## ####  ## ##       ##     ## ##       ##     ## ##       ##     ##|\n\t\t\
-        |##     ## ## ## ##  ######  ##     ## ##       ##     ## ######   ##     ##|\n\t\t\
-        |##     ## ##  ####       ## ##     ## ##        ##   ##  ##       ##     ##|\n\t\t\
-        |##     ## ##   ### ##    ## ##     ## ##         ## ##   ##       ##     ##|\n\t\t\
-        | #######  ##    ##  ######   #######  ########    ###    ######## ######## |\n\t\t\
-        '---------------------------------------------------------------------------'\n\n");
-        printf("\t\t\t\t\t\t[ESCOLHA UMA DAS OPÇÕES]\n\n\t\t\t\t\t\t(1) - JORNADA\n\t\t\t\t\t\t(2) - CRÉDITOS\n\t\t\t\t\t\t(3) - SAIR DE UNSOLVED\n\t\t\t\t\t\t ");
+        title();
+        printf("\t\t\t\t\t\t[ESCOLHA UMA DAS OPÇÕES]\n\n\t\t\t\t\t\t[1] - JORNADA\n\t\t\t\t\t\t[2] - CRÉDITOS\n\t\t\t\t\t\t[3] - SAIR DE UNSOLVED\n\t\t\t\t\t\t ");
         scanf("%i",&escolha);
 
         
@@ -54,8 +51,7 @@ int main()
             system("cls");
             printf("\t\t\t\tApós anos de investigação, o departamento da verdade encerrou\n\t\t\t\t o caso o qual você tentou encontrar as respostas.\n\n\t\t\t\tVocê acreditava que estava cada vez mais perto de uma solução,\n\t\t\t\t sendo assim, decidiu fazer isso por conta própria.\n\n");
             Sleep(2500);
-            printf("\n\t\t\t\t\t[APERTE QUALQUER TECLA PARA CONTINUAR]");
-            system("pause > NUL");
+            pause();
             system("cls");
             escolha++;
         }
@@ -63,8 +59,7 @@ int main()
         {
             system("cls");
             printf("\t\t\t\t\t\t\tCRÉDITOS:\n\n\t\t\t\t\t\tLUAN PIEDADE DE OLIVEIRA\n");
-            printf("\n\t\t\t\t\t[APERTE QUALQUER TECLA PARA CONTINUAR]");
-            system("pause > NUL");
+            pause();
             escolha=0;
 
         }
@@ -89,7 +84,7 @@ int main()
     while (escolha==0)
     {
         printf("\n\n\t\t\t\t\tDIGITE SEU NOME: ");
-        gets(nome);
+        scanf("%s", nome);
         system("cls");
         printf("\t\t\t\t\tVOCÊ TEM CERTEZA DA SUA ESCOLHA?\n\t\t\t\t\t(1)-SIM\n\t\t\t\t\t(2)-NÃO\n\t\t\t\t\t");
         scanf("%i",&escolha);
@@ -116,7 +111,7 @@ int main()
         
     }
     
-    puts(nome);
+    printf("%s",nome);
     Sleep(1500);
     system("cls");
     printf("\t\t\t\tO ano é 1946, o mundo se mostra perdido em meio a\n\t\t\t\tascenção de grandes potências. Aconteça o que acontecer,....");
@@ -129,8 +124,7 @@ int main()
     Sleep(1000);
     printf("\n\t\t\t\tNOME\n\t\t\t\t");
     Sleep(2500);
-    printf("\n\t\t\t\t\t[APERTE QUALQUER TECLA PARA CONTINUAR]");
-    system("pause > NUL");
+    pause();
     system("cls");
 
     for ( i = 0; i < 20; i++)
