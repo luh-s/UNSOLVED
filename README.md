@@ -1,5 +1,5 @@
 ## UNSOLVED
-UNSOLVED é um jogo do gênero aventura, feito na linguagem C para um projeto da faculdade da matéria de algoritmo e codificação de sistemas. O jogo tem a intenção de proporcionar ao usuario uma jornada repleta de diversão e desafios para serem resolvidos.
+UNSOLVED é um jogo do gênero aventura, feito na linguagem C para um projeto da faculdade, da matéria de algoritmo e codificação de sistemas. O jogo tem a intenção de proporcionar ao usuario uma jornada repleta de diversão e desafios para serem resolvidos.
 ## Pre requisitos📍
 É necessario a utilização de algum aplicativo que proporcione a execção do código na linguagem C como Visual Studio Code ou Falcon C++, se o jogo for executado no Visual code, deve-se ser instalado a extensão para faze-lo ser executado no Prompt de comando com a extensão(C/C++ Compile Run).
 ## instrução de uso📍
