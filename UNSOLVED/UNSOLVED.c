@@ -182,6 +182,12 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
             mapa[1][13]='@';
         }
     }
+    else if (numap==7)
+    {
+        mapa[2][1]='&';
+        mapa[2][0]=']';
+    }
+    
 
     //[-=- MOVIMENTAÇÃO, INTERAÇÃO E DIÁLOGOS -=-]
     while (i!=-1)
@@ -193,13 +199,30 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
         }
         else if (numap==2)
         {
-            printf("\n\t\t\t\t   [-=- PRÉDIO ABANDONADO-=-]\n\n");
+            printf("\n\t\t\t\t   [-=- BANDAS -=-]\n\n");
+        }
+        else if (numap==3)
+        {
+            printf("\n\t\t\t\t   [-=- VASTO CAMPO -=-]\n\n");
+        }
+        else if (numap==4)
+        {
+            /* code */
         }
         else if (numap==5)
         {
             printf("\n\t\t\t [-=- CASA DESCONHECIDA -=-]\n\n");
         }
+        else if (numap==6)
+        {
+            printf("\n\t\t\t [-=- CASA ACOCHEGANTE -=-]\n\n");
+        }
+        else if (numap==7)
+        {
+            printf("\n\t\t\t [-=- BARRACO GRANDE -=-]\n\n");
+        }
         
+
         //[-=- PRINT DA MODELAGEM DO MAPA -=-]
         for (i = 0; i < v1; i++)
         {
@@ -210,13 +233,19 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
             }
         }
 
+
         //[-=- MOVIMENTAÇÃO -=-]
         movimento=getch();
         mapa[y][x]=' ';
         if (movimento=='w')
         {
-            if (mapa[y-1][x]==' ')
+            if (mapa[y-1][x]==' ' || mapa[y-1][x]=='X')
             {
+                if (mapa[y-1][x]=='X')
+                {
+                    morte=morte+1;
+                    death(morte,numap);
+                }
                 y--;
                 if (mapa[y+1][x]==mapa[18][1])
                 {
@@ -246,7 +275,7 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
         }
         else if (movimento=='a')
         {
-            if (mapa[y][x-1]==' ' || mapa[y][x-1]=='O')
+            if (mapa[y][x-1]==' ' || mapa[y][x-1]=='O' || mapa[y][x-1]=='X')
             {
                 if (mapa[y][x-1]=='O'&& botao==0)
                 {
@@ -261,6 +290,11 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
                     pause();
                     map(20,20,3,18,1,0,1,0);
                 }
+                if (mapa[y][x-1]=='X')
+                {
+                    morte=morte+1;
+                    death(morte,numap);
+                }
                 x--;
             }   
             else if (mapa[y][x-1]=='^')
@@ -271,7 +305,7 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
         }
         else if (movimento=='s')
         {
-            if (mapa[y+1][x]==' ' || mapa[y+1][x]=='O')
+            if (mapa[y+1][x]==' ' || mapa[y+1][x]=='O' || mapa[y+1][x]=='X')
             {
                 if (mapa[y+1][x]=='O'&& botao==0)
                 {
@@ -285,6 +319,11 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
                     Sleep(1200);
                     pause();
                     map(20,20,3,18,1,0,1,0);
+                }
+                if (mapa[y+1][x]=='X')
+                {
+                    morte=morte+1;
+                    death(morte,numap);
                 }
                 y++;
             }
@@ -321,10 +360,15 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
                 death(morte,numap);
             }
         }
-        else if (movimento=='d')
+        else if (movimento=='d'|| movimento=='D')
         {
-            if (mapa[y][x+1]==' ')
+            if (mapa[y][x+1]==' ' || mapa[y][x+1]=='X')
             {
+                if (mapa[y][x+1]=='X')
+                {
+                    morte=morte+1;
+                    death(morte,numap);
+                }
                 x++;
                 if (mapa[y][x-1]==mapa[18][1])
                 {
@@ -358,6 +402,18 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
                     pause();
                     map(20,20,3,2,1,0,0,0);
                 }
+                else if (numap==3)
+                {
+                    printf("\n\t\t\t\t\t\t[-=- DIÁLOGO -=-]\n\n\tDesesperado, você entra na casa abandonada e tranca a porta.");
+                    Sleep(1200);
+                    printf("\n\n\tVocê: -Droga, quase que aquela coisa me pega.");
+                    Sleep(1200);
+                    printf("\n\n\tVocê escuta batidas na porta.\n\n\n\t\t\t\t      ");
+                    Sleep(1200);
+                    pause();
+                    map(15,13,7,3,1,0,1,0);
+                }
+                
             }
             else if (mapa[y][x+1]=='|')
             {
@@ -401,7 +457,7 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int bota
                     Sleep(1200);
                     printf("\n\n\tPessoa: -Procuro respostas.");
                     Sleep(1200);
-                    printf("\n\n\tSenhor desconhecido: -Todos procuram...Siga em direção ao leste, você deve encontrar algo naqueles prédios.");
+                    printf("\n\n\tSenhor desconhecido: -Todos procuram...Siga em direção ao leste, você deve encontrar algo naquelas bandas.");
                     Sleep(1200);
                     printf("\n\n\tSenhor desconhecido: -Já ia me esquecendo, pegue a chave em minha casa (@),\n\t\t\t       você precisará dela para abrir o portão.\n\n\n\t\t\t\t      ");
                     pause();
@@ -598,7 +654,7 @@ int main()
         else if (escolha=='2')
         {
             system("cls");
-            printf("\t\t\t\t\t\t   [-=- CRÉDITOS -=-]\n\n\n\t\t\t\t\t    [-=- PROJETADO E ESCRITO POR -=- ]\n\n\t\t\t\t\t\tLUAN PIEDADE DE OLIVEIRA\n\n\n\t\t\t\t\t  ");
+            printf("\t\t\t\t\t\t   [-=- CRÉDITOS -=-]\n\n\n\t\t\t\t\t    [-=- PROJETADO E ESCRITO POR -=- ]\n\n\t\t\t\t\t\tLUAN PIEDADE DE OLIVEIRA\n\n\t\t\t\t\t\tE\n\n\t\t\t\t\t\tLUCAS SOUSA JATENE\n\n\n\t\t\t\t\t  ");
             pause();
             escolha=0;
 
