@@ -29,11 +29,12 @@ void pause()
     printf("[APERTE QUALQUER TECLA PARA CONTINUAR]\n");
     system("pause > NUL");
 }
-void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
+void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem,int botaom,int mortem)
 {
     //[-=- SISTEMA DO JOGO -=-]
     srand(time(0));
-    int i,i2,x=xjogador,y=yjogador,chave=chavem,botao=0;
+    int i,i2,x=xjogador,y=yjogador,chave=chavem,botao=botaom,morte=mortem;
+    int yenim,xenim,enimc=0;
     char mapa[v1][v2],movimento;
 
     //[-=- MODELAGEM DOS MAPAS -=-]
@@ -103,6 +104,45 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
         mapa[2][0]=']';
         mapa[2][1]='&';
         mapa[18][1]='O';
+        for (i = 1; i < 8; i++)
+        {
+            for (i2 = 12; i2 < 19; i2++)
+            {
+                if (i==7 || i2==12)
+                    mapa[i][i2]='#';
+                else
+                    mapa[i][i2]='*';
+            }
+            mapa[2][12]='[';
+        }
+        if (botao==1)
+        {
+            mapa[2][1]=' ';
+            mapa[18][1]='&';
+            mapa[2][12]=']';
+
+            for (i = 14; i < 17; i++)
+            {
+                for (i2 = 1; i2 < 19; i2++)
+                {
+                    if (i==16 || i==14 || i2==11 ||i2==15)
+                    {
+                        mapa[i][i2]='^';
+                    }
+                }
+            }
+            for (i = 12; i < 15; i++)
+            {
+                mapa[16][i]=' ';
+            }
+            for (i = 12; i < 15; i++)
+            {
+                mapa[14][i]=' ';
+            }
+            yenim=10;
+            xenim=2;
+            mapa[yenim][xenim]='X';
+        }
     }
     else if (numap==4)
     {
@@ -189,23 +229,45 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
                 system("cls");
                 if (chave==0)
                 {
-                    map(10,11,5,8,5,0);
+                    map(10,11,5,8,5,0,0,0);
                 }
                 else
                 {
-                    map(10,11,5,8,5,1);
+                    map(10,11,5,8,5,1,0,0);
                 }
                 
                 system("pause");
             }
-               
+            else if (mapa[y-1][x]=='^')
+            {
+                morte=morte+1;
+                death(morte,numap);
+            }
         }
         else if (movimento=='a')
         {
             if (mapa[y][x-1]==' ' || mapa[y][x-1]=='O')
             {
+                if (mapa[y][x-1]=='O'&& botao==0)
+                {
+                    botao=1;
+                    system("cls");
+                    printf("\n\t\t\t\t\t\t[-=- DIÁLOGO -=-]\n\n\tLogo após apertar o botão, espinhos saem do chão.");
+                    Sleep(1200);
+                    printf("\n\n\tUma criatura emerge de um vão.");
+                    Sleep(1200);
+                    printf("\n\n\tVocê mal consegue mexer o pé do chão.\n\n\n\t\t\t\t      ");
+                    Sleep(1200);
+                    pause();
+                    map(20,20,3,18,1,0,1,0);
+                }
                 x--;
             }   
+            else if (mapa[y][x-1]=='^')
+            {
+                morte=morte+1;
+                death(morte,numap);
+            }
         }
         else if (movimento=='s')
         {
@@ -219,9 +281,10 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
                     Sleep(1200);
                     printf("\n\n\tUma criatura emerge de um vão.");
                     Sleep(1200);
-                    printf("\n\n\tVocê mal consegue mexer o pé do chão.");
+                    printf("\n\n\tVocê mal consegue mexer o pé do chão.\n\n\n\t\t\t\t      ");
                     Sleep(1200);
                     pause();
+                    map(20,20,3,18,1,0,1,0);
                 }
                 y++;
             }
@@ -232,25 +295,30 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
                 {
                     if (chave==0)
                     {
-                        map(11,30,1,5,2,0);
+                        map(11,30,1,5,2,0,0,0);
                     }
                     else
                     {
-                        map(11,30,1,5,2,1);
+                        map(11,30,1,5,2,1,0,0);
                     }
                 }
                 else if (numap==6)
                 {
                     if (chave==0)
                     {
-                        map(10,30,2,2,22,0);
+                        map(10,30,2,2,22,0,0,0);
                     }
                     else
                     {
-                        map(10,30,2,2,22,1);
+                        map(10,30,2,2,22,1,0,0);
                     }
                 }
                 
+            }
+            else if (mapa[y+1][x]=='^')
+            {
+                morte=morte+1;
+                death(morte,numap);
             }
         }
         else if (movimento=='d')
@@ -277,7 +345,7 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
                     printf("\n\n\tPessoa: -Desgraçado...Que coisa?\n\n\n\t\t\t\t      ");
                     Sleep(1200);
                     pause();
-                    map(10,30,2,5,1,0);
+                    map(10,30,2,5,1,0,0,0);
                 }
                 else if (numap==2)
                 {
@@ -285,10 +353,10 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
                     Sleep(1200);
                     printf("\n\n\tPessoa: Que lugar vazio...vejo apenas um botão.");
                     Sleep(1200);
-                    printf("\n\n\t(O vento canta uma leve canção.\n\n\n\t\t\t\t      ");
+                    printf("\n\n\tO vento canta uma leve canção.\n\n\n\t\t\t\t      ");
                     Sleep(1200);
                     pause();
-                    map(20,20,3,2,1,0);
+                    map(20,20,3,2,1,0,0,0);
                 }
             }
             else if (mapa[y][x+1]=='|')
@@ -298,13 +366,18 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
                 {
                     if (chave==0)
                     {
-                        map(6,15,6,4,2,0);
+                        map(6,15,6,4,2,0,0,0);
                     }
                     else
                     {
-                        map(6,15,6,4,2,1);
+                        map(6,15,6,4,2,1,0,0);
                     }
                 }
+            }
+            else if (mapa[y][x+1]=='^')
+            {
+                morte=morte+1;
+                death(morte,numap);
             }
         }
         else if (movimento=='e')
@@ -392,7 +465,7 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
                 }
                 else if (movimento=='3')
                 {
-
+                    main();
                 }
                 else
                 {
@@ -402,7 +475,89 @@ void map(int v1, int v2,int numap,int yjogador,int xjogador, int chavem)
                 
             }
         }
+        if (numap==3 && botao==1)
+        {
+            //[-=- SISTEMA DE MOVIMENTAÇÃO INIMIGO -=-]
+            mapa[yenim][xenim]=' ';
+            enimc=rand()%2;
+            if (enimc==0)
+            {
+                enimc=rand()%2;
+                if (enimc==0)
+                {
+                    if (mapa[yenim-1][xenim]==' ')
+                    {
+                        yenim--;
+                    }
+                }
+                else
+                {
+                    if (mapa[yenim+1][xenim]==' ')
+                    {
+                        yenim++;
+                    }
+                }
+            }
+            else if (enimc==1)
+            {
+                enimc=rand()%2;
+                if (enimc==0)
+                {
+                    if (mapa[yenim][xenim-1]==' ')
+                    {
+                        xenim--;
+                    }
+                }
+                else
+                {
+                    if (mapa[yenim][xenim+1]==' ')
+                    {
+                        xenim++;
+                    }
+                }
+            }
+            mapa[yenim][xenim]='X';
+        }
         mapa[y][x]='&';
+        if (numap==3  && botao==1)
+        {
+            if (mapa[y][x]==mapa[yenim][xenim])
+            {
+                morte=morte+1;
+                death(morte,numap);
+            }
+        }
+    }
+}
+void death(int morte, int numap)
+{
+    //[-=- SISTEMA DE CONTABILIDADE DE MORTES -=-]
+    if (numap==3)
+    {
+        if (morte!=3)
+        {
+            system("cls");
+            printf("\n\t\t\t\t\t\t[-=- MORTE -=-]\n\n\tVocê morreu!");
+            Sleep(1200);
+            printf("\n\n\tVocê morreu %i/3 vezes!\n\n\n\t\t\t\t      ",morte);
+            Sleep(1200);
+            pause();
+            map(20,20,3,18,1,0,1,morte);
+        }
+        else
+        {
+            system("cls");
+            printf("\n\t\t\t\t\t\t[-=- MORTE -=-]\n\n\tVocê morreu 3/3 vezes!");
+            Sleep(1200);
+            printf("\n\n\tVocê morreu muitas vezes, volte para o inicio!\n\n\n\t\t\t\t      ");
+            Sleep(1200);
+            pause();
+            main();
+        }
+    }
+    else if (numap==4)
+    {
+        printf("s");
     }
 }
 
@@ -555,9 +710,10 @@ int main()
     system("cls");
 
     //[-=- VOID PARA GERAR AS FUNÇÕES DO JOGO -=-]
-    map(11,30,1,6,15,0);
+    map(11,30,1,6,15,0,0,0);
 
     fim:
     
     return 0;
 }
+
