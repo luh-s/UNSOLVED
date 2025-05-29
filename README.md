@@ -9,7 +9,8 @@ UNSOLVED é um jogo do gênero aventura, feito na linguagem C e com a utilizaç�
 ### Visual Studio Code: Baixe o arquivo "UNSOLVED.C" disponibilizado no github, no visual Studio Code instale a extensão(C/C++ Compile Run) para o código conseguir ser executado no prompt de comando, com as etapas anteriores concluídas, aperte a tecla "F8" e se divirta com o UNSOLVED.
 ### Falcon:Baixe o arquivo "UNSOLVED.C" disponibilizado no github, no Falcon C++, clique na opção arquivo no canto superior da tela e selecione a opção "abrir", clique no botão de execução e se divirta com o UNSOLVED.
 ## história📖
-
+Você é um agente do departamento da verdade o qual teve um caso encerrado, achando a situação estranha, decide por tentar encontrar uma solução com suas próprias mãos em meio a ascenção de grande pontências.
+Será que essa jornada trará respostas?.
 ## Licenças✔
 Permissão somente para uso educacional.
 ### Cuidados
